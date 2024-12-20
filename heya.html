@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You Animation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #4e4ea8, #c4a4e5);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(45deg);
+            animation: float 5s infinite ease-in-out;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            top: 0;
+            left: -10px;
+        }
+
+        .floating-text {
+            position: absolute;
+            font-size: 24px;
+            color: #000;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            animation: float-text 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(45deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-800px) rotate(45deg);
+            }
+        }
+
+        @keyframes float-text {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-800px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            document.body.appendChild(heart);
+
+            const size = Math.random() * 10 + 10;
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.top = `${Math.random() * 100}vh`;
+            heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        function createFloatingText() {
+            const text = document.createElement("div");
+            text.classList.add("floating-text");
+            text.textContent = "I love you";
+            document.body.appendChild(text);
+
+            text.style.left = `${Math.random() * 100}vw`;
+            text.style.top = `${Math.random() * 100}vh`;
+            text.style.animationDuration = `${Math.random() * 2 + 3}s`;
+
+            setTimeout(() => {
+                text.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 100);
+        setInterval(createFloatingText, 200);
+    </script>
+</body>
+</html>
